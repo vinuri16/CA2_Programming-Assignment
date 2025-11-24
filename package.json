@@ -2,7 +2,7 @@
   "name": "ca2_programming-assignment",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,12 @@
   "homepage": "https://github.com/vinuri16/CA2_Programming-Assignment#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^5.1.0"
-  }
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongoose": "^9.0.0"
+  },
+  "connect-src": [
+    "self",
+    "http://localhost:3000"
+  ]
 }
