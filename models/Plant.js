@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
-// This Schema defines the structure of a "Plant" in our database
+// structure of a Plant in the database
 const PlantSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true // The plant MUST have a name
+    required: true 
   },
   type: {
     type: String, 
     required: true,
-    enum: ['Indoor', 'Outdoor', 'Succulent'] // Optional: Restrict to specific types
+    enum: ['Indoor', 'Outdoor',]
   },
   price: {
     type: Number,
@@ -18,13 +18,13 @@ const PlantSchema = new mongoose.Schema({
   stockLevel: {
     type: Number,
     required: true,
-    default: 0 // Default to 0 if not specified
+    default: 0 
   },
   supplier: {
     type: String,
     required: false
   },
-  // We can add a "createdAt" timestamp automatically
+ 
 }, { timestamps: true });
 
 module.exports = mongoose.model('Plant', PlantSchema);
