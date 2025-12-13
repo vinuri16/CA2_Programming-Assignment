@@ -1,28 +1,27 @@
 {
-  "name": "ca2_programming-assignment",
+  "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vinuri16/CA2_Programming-Assignment.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/vinuri16/CA2_Programming-Assignment/issues"
   },
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
   "homepage": "https://github.com/vinuri16/CA2_Programming-Assignment#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "mongoose": "^9.0.0"
+    "express": "^5.1.0"
   },
   "connect-src": [
     "self",
