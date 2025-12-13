@@ -17,9 +17,14 @@ export default function Footer() {
               Your premier destination for indoor and outdoor plants in Dublin. 
               We're committed to bringing sustainable greenery to urban spaces across Ireland.
             </p>
-            <div className="text-gray-300">
-              <p className="mb-1">📍 Cork Street, Dublin, Ireland</p>
-              <p className="mb-1">📞 +353 1 234 5678</p>
+          </div>
+
+          {/* Contact Information */}
+          <div>
+            <h3 className="font-semibold text-lg mb-4">Contact Info</h3>
+            <div className="text-gray-300 space-y-2">
+              <p>📍 Cork Street, Dublin, Ireland</p>
+              <p>📞 +353 1 234 5678</p>
               <p>✉️ info@urbanplantlife.ie</p>
             </div>
           </div>
@@ -45,12 +50,10 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-
-          
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-center items-center">
             <p className="text-gray-400 text-sm">
               © 2025 Urban Plant Life. All rights reserved.
             </p>
