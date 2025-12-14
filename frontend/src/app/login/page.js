@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { authAPI } from '@/lib/api';
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -26,30 +27,20 @@ export default function Login() {
     setError('');
 
     try {
-      // Test authentication 
-      if (formData.email === 'admin@urbanplantlife.ie' && formData.password === 'admin123') {
-        const adminUser = {
-          id: 1,
-          email: 'admin@urbanplantlife.ie',
-          name: 'Admin User',
-          role: 'admin'
-        };
-        localStorage.setItem('user', JSON.stringify(adminUser));
+      const response = await authAPI.login(formData.email, formData.password);
+
+      // Store token and user info
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+
+      // Redirect based on role
+      if (response.data.user.role === 'admin' || response.data.user.role === 'staff') {
         router.push('/admin/inventory');
-      } else if (formData.email && formData.password) {
-        const customerUser = {
-          id: 2,
-          email: formData.email,
-          name: 'Customer User',
-          role: 'customer'
-        };
-        localStorage.setItem('user', JSON.stringify(customerUser));
-        router.push('/catalog');
       } else {
-        setError('Invalid email or password');
+        router.push('/catalog');
       }
     } catch (err) {
-      setError('Login failed. Please try again.');
+      setError(err.message || 'Login failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -158,13 +149,15 @@ export default function Login() {
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Demo Credentials</span>
+                <span className="px-2 bg-white text-gray-500">Test Account</span>
               </div>
             </div>
 
             <div className="mt-4 text-sm text-gray-600 bg-gray-50 p-3 rounded">
-              <p className="mb-2"><strong>Admin:</strong> admin@urbanplantlife.ie / admin123</p>
-              <p><strong>Customer:</strong> Any email / any password</p>
+              <p className="mb-2"><strong>Admin:</strong> admin@test.com / admin123</p>
+              <p className="mb-2"><strong>Staff:</strong> staff@test.com / staff123</p>
+              <p><strong>Customer:</strong> customer@test.com / customer123</p>
+              <p className="mt-3 text-xs text-gray-500">Or create a new account with Register</p>
             </div>
           </div>
         </div>

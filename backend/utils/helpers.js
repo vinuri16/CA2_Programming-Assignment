@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
  */
 async function hashPassword(password) {
   const rounds = parseInt(process.env.ARGON_ITERATIONS || "10", 10);
-  return await argon2.hash(password, { salt: Buffer.from(process.env.ARGON_SALT, 'hex'), timeCost: rounds, memoryCost: 16, parallelism: 1, hashLength: 16, type: argon2.argon2i });
+  return await argon2.hash(password, { salt: Buffer.from(process.env.ARGON_SALT), timeCost: rounds, memoryCost: 16, parallelism: 1, hashLength: 16, type: argon2.argon2i });
 }
 
 /**

@@ -6,10 +6,10 @@ const { sendResponse, generateToken, isValidEmail, isValidPassword } = require("
  */
 exports.register = async (req, res) => {
   try {
-    const { username, email, password, passwordConfirm } = req.body;
+    const { username, email, password } = req.body;
 
     // Validation
-    if (!username || !email || !password || !passwordConfirm) {
+    if (!username || !email || !password) {
       return sendResponse(
         res,
         400,
@@ -29,10 +29,6 @@ exports.register = async (req, res) => {
         null,
         "Password must be at least 6 characters long."
       );
-    }
-
-    if (password !== passwordConfirm) {
-      return sendResponse(res, 400, null, "Passwords do not match.");
     }
 
     // Check if user already exists
