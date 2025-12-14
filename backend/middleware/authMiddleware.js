@@ -32,6 +32,16 @@ function requireAdmin(req, res, next) {
 
 
 /**
+ * Middleware to check if user is an admin or staff
+ */
+function requireStaffOrAdmin(req, res, next) {
+  if (!req.user || (req.user.role !== "admin" && req.user.role !== "staff")) {
+    return sendResponse(res, 403, null, "Admin or staff access required.");
+  }
+  next();
+}
+
+/**
  * Middleware to check if user is owner of resource or admin
  */
 function requireOwnerOrAdmin(req, res, next) {

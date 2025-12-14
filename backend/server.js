@@ -11,6 +11,7 @@ const pool = require("./utils/db");
 const authRoutes = require("./routes/authRoutes");
 const plantRoutes = require("./routes/plantRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const cartRoutes = require("./routes/cartRoutes");
 
 // Initialize the App
 const app = express();
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
 app.use("/api/plants", plantRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/cart", cartRoutes);
 
 // Root route
 app.get("/", (req, res) => {
@@ -65,6 +67,12 @@ app.listen(PORT, () => {
   console.log("\tPOST   /api/plants (admin)");
   console.log("\tPUT    /api/plants/:id (admin)");
   console.log("\tDELETE /api/plants/:id (admin)");
+  console.log("\tGET    /api/cart");
+  console.log("\tPOST   /api/cart");
+  console.log("\tGET    /api/cart/:plant_id");
+  console.log("\tPUT    /api/cart/:plant_id");
+  console.log("\tDELETE /api/cart/:plant_id");
+  console.log("\tDELETE /api/cart");
   console.log("\tPOST   /api/orders");
   console.log("\tGET    /api/orders/my-orders");
   console.log("\tGET    /api/orders (staff/admin)");
