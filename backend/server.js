@@ -9,6 +9,7 @@ const pool = require("./utils/db");
 
 // Import Routes
 const authRoutes = require("./routes/authRoutes");
+const plantRoutes = require("./routes/plantRoutes");
 
 // Initialize the App
 const app = express();
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // API Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/plants", plantRoutes);
 
 // Root route
 app.get("/", (req, res) => {
@@ -55,4 +57,10 @@ app.listen(PORT, () => {
   console.log("\tPOST   /api/auth/login");
   console.log("\tPOST   /api/auth/logout");
   console.log("\tGET    /api/auth/profile");
+  console.log("\tPUT    /api/auth/profile");
+  console.log("\tGET    /api/plants");
+  console.log("\tGET    /api/plants/:id");
+  console.log("\tPOST   /api/plants (admin)");
+  console.log("\tPUT    /api/plants/:id (admin)");
+  console.log("\tDELETE /api/plants/:id (admin)");
 });
