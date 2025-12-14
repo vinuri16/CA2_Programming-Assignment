@@ -99,14 +99,17 @@ exports.updatePlant = async (req, res) => {
     }
 
     const updateData = {};
-    const { name, description, price, stock_quantity, low_stock_threshold, image_url } = req.body;
+    const { name, description, price, stock_quantity, low_stock_threshold, image_url, image } = req.body;
 
     if (name) updateData.name = name;
     if (description) updateData.description = description;
     if (price !== undefined) updateData.price = parseFloat(price);
     if (stock_quantity !== undefined) updateData.stock_quantity = parseInt(stock_quantity, 10);
     if (low_stock_threshold !== undefined) updateData.low_stock_threshold = parseInt(low_stock_threshold, 10);
-    if (image_url) updateData.image_url = image_url;
+
+    // Support both 'image' (Uploadcare CDN) and 'image_url' (backward compatibility)
+    if (image) updateData.image_url = image;
+    else if (image_url) updateData.image_url = image_url;
 
     const updatedPlant = await Plant.updatePlant(parseInt(id, 10), updateData);
 
