@@ -167,7 +167,7 @@ export default function Catalog() {
           <>
             <div className="grid grid-cols-4 gap-6 mb-12">
               {filteredPlants.map((plant) => (
-                <div key={plant.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <div key={plant.plant_id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                   {/* Plant Image */}
                   <div className="h-48 bg-linear-to-br from-green-100 to-green-200 flex items-center justify-center relative overflow-hidden">
                     {plant.image_url ? (
@@ -205,7 +205,8 @@ export default function Catalog() {
                       </span>
                     </div>
 
-                    <p className="text-gray-600 text-sm mb-3">{plant.description}</p>
+                    {/* Plant Description */}
+                    <p className="text-gray-600 text-sm mb-3 line-clamp-2">{plant.description}</p>
 
                     <div className="space-y-2 mb-4">
                       <div className="flex justify-between text-sm">
