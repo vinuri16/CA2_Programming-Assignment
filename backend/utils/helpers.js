@@ -1,19 +1,19 @@
-const bcrypt = require("bcryptjs");
+const argon2 = require('argon2');
 const jwt = require("jsonwebtoken");
 
 /**
  * Hash a password
  */
 async function hashPassword(password) {
-  const rounds = parseInt(process.env.BCRYPT_ROUNDS || "10", 10);
-  return await bcrypt.hash(password, rounds);
+  const rounds = parseInt(process.env.ARGON_ITERATIONS || "10", 10);
+  return await argon2.hash(password, { salt: Buffer.from(process.env.ARGON_SALT, 'hex'), timeCost: rounds, memoryCost: 16, parallelism: 1, hashLength: 16, type: argon2.argon2i });
 }
 
 /**
  * Compare password with hashed password
  */
 async function comparePassword(password, hash) {
-  return await bcrypt.compare(password, hash);
+  return await argon2.verify(hash, password);
 }
 
 /**
