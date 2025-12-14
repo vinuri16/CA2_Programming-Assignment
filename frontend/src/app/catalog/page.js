@@ -1,11 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { plantAPI } from '@/lib/api';
+import { useCart } from '@/context/CartContext';
 
 export default function Catalog() {
+  const { addToCart, getTotalItems } = useCart();
   const [plants, setPlants] = useState([]);
   const [filteredPlants, setFilteredPlants] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,6 +17,7 @@ export default function Catalog() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
 
   // Fetch plants from backend
   useEffect(() => {
@@ -78,14 +82,24 @@ export default function Catalog() {
     setFilteredPlants(filtered);
   }, [plants, selectedCategory, searchTerm, sortBy]);
 
-  const handleAddToCart = (plant) => {
+  const handleAddToCart = async (plant) => {
     if (!user) {
       alert('Please login to add items to cart');
       return;
     }
 
-    // Mock add to cart functionality
-    alert(`Added ${plant.name} to cart!`);
+    if (plant.stock_quantity === 0) {
+      alert('This item is out of stock');
+      return;
+    }
+
+    try {
+      await addToCart(plant);
+      setSuccessMessage(`${plant.name} added to cart!`);
+      setTimeout(() => setSuccessMessage(''), 3000);
+    } catch (err) {
+      alert('Failed to add item to cart: ' + err.message);
+    }
   };
 
   return (
@@ -98,6 +112,19 @@ export default function Catalog() {
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Plant Catalog</h1>
           <p className="text-gray-600">Discover our complete collection of indoor and outdoor plants</p>
         </div>
+
+        {/* Success Message */}
+        {successMessage && (
+          <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded mb-6 flex justify-between items-center">
+            <span>{successMessage}</span>
+            <Link
+              href="/cart"
+              className="font-semibold text-green-700 hover:text-green-900 ml-4"
+            >
+              View Cart ({getTotalItems()})
+            </Link>
+          </div>
+        )}
 
         {/* Search and Filter Bar */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">

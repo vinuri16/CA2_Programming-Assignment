@@ -2,9 +2,12 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useCart } from '@/context/CartContext';
 
 export default function Navbar({ user, setUser }) {
   const pathname = usePathname();
+  const { getTotalItems } = useCart();
+  const cartCount = getTotalItems();
 
   const handleLogout = () => {
     setUser(null);
@@ -30,13 +33,12 @@ export default function Navbar({ user, setUser }) {
 
           {/* Navigation */}
           <div className="flex items-center space-x-8">
-            <Link 
-              href="/catalog" 
-              className={`transition-colors ${
-                isActive('/catalog') 
-                  ? 'text-green-600 font-medium border-b-2 border-green-600 pb-1' 
+            <Link
+              href="/catalog"
+              className={`transition-colors ${isActive('/catalog')
+                  ? 'text-green-600 font-medium border-b-2 border-green-600 pb-1'
                   : 'text-gray-600 hover:text-green-600'
-              }`}
+                }`}
             >
               Plant Catalog
             </Link>
@@ -44,46 +46,56 @@ export default function Navbar({ user, setUser }) {
               <>
                 {user.role === 'admin' ? (
                   <>
-                    <Link 
-                      href="/admin/inventory" 
-                      className={`transition-colors ${
-                        isActive('/admin/inventory') 
-                          ? 'text-green-600 font-medium border-b-2 border-green-600 pb-1' 
+                    <Link
+                      href="/admin/inventory"
+                      className={`transition-colors ${isActive('/admin/inventory')
+                          ? 'text-green-600 font-medium border-b-2 border-green-600 pb-1'
                           : 'text-gray-600 hover:text-green-600'
-                      }`}
+                        }`}
                     >
                       Inventory
                     </Link>
-                    <Link 
-                      href="/admin/orders" 
-                      className={`transition-colors ${
-                        isActive('/admin/orders') 
-                          ? 'text-green-600 font-medium border-b-2 border-green-600 pb-1' 
+                    <Link
+                      href="/admin/orders"
+                      className={`transition-colors ${isActive('/admin/orders')
+                          ? 'text-green-600 font-medium border-b-2 border-green-600 pb-1'
                           : 'text-gray-600 hover:text-green-600'
-                      }`}
+                        }`}
                     >
                       Orders
                     </Link>
                   </>
                 ) : (
                   <>
-                    <Link 
-                      href="/orders" 
-                      className={`transition-colors ${
-                        isActive('/orders') 
-                          ? 'text-green-600 font-medium border-b-2 border-green-600 pb-1' 
+                    <Link
+                      href="/cart"
+                      className={`transition-colors relative ${isActive('/cart')
+                          ? 'text-green-600 font-medium'
                           : 'text-gray-600 hover:text-green-600'
-                      }`}
+                        }`}
+                    >
+                      🛒 Cart
+                      {cartCount > 0 && (
+                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                          {cartCount}
+                        </span>
+                      )}
+                    </Link>
+                    <Link
+                      href="/orders"
+                      className={`transition-colors ${isActive('/orders')
+                          ? 'text-green-600 font-medium border-b-2 border-green-600 pb-1'
+                          : 'text-gray-600 hover:text-green-600'
+                        }`}
                     >
                       My Orders
                     </Link>
-                    <Link 
-                      href="/profile" 
-                      className={`transition-colors ${
-                        isActive('/profile') 
-                          ? 'text-green-600 font-medium border-b-2 border-green-600 pb-1' 
+                    <Link
+                      href="/profile"
+                      className={`transition-colors ${isActive('/profile')
+                          ? 'text-green-600 font-medium border-b-2 border-green-600 pb-1'
                           : 'text-gray-600 hover:text-green-600'
-                      }`}
+                        }`}
                     >
                       Profile
                     </Link>
@@ -98,23 +110,21 @@ export default function Navbar({ user, setUser }) {
               </>
             ) : (
               <>
-                <Link 
-                  href="/login" 
-                  className={`transition-colors ${
-                    isActive('/login') 
-                      ? 'text-green-600 font-medium border-b-2 border-green-600 pb-1' 
+                <Link
+                  href="/login"
+                  className={`transition-colors ${isActive('/login')
+                      ? 'text-green-600 font-medium border-b-2 border-green-600 pb-1'
                       : 'text-gray-600 hover:text-green-600'
-                  }`}
+                    }`}
                 >
                   Login
                 </Link>
-                <Link 
-                  href="/register" 
-                  className={`px-4 py-2 rounded-lg transition-colors ${
-                    isActive('/register')
+                <Link
+                  href="/register"
+                  className={`px-4 py-2 rounded-lg transition-colors ${isActive('/register')
                       ? 'bg-green-700 text-white'
                       : 'bg-green-600 text-white hover:bg-green-700'
-                  }`}
+                    }`}
                 >
                   Register
                 </Link>

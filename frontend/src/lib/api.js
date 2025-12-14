@@ -175,6 +175,17 @@ export const orderAPI = {
   },
 
   /**
+   * Get orders for the current user
+   * @returns {Promise<Array>} Array of user's orders
+   */
+  getForUser: async () => {
+    const response = await fetch(`${API_BASE_URL}/orders/my-orders`, {
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  },
+
+  /**
    * Get a single order by ID
    * @param {number} id - Order ID
    * @returns {Promise<object>} Order data
@@ -221,6 +232,89 @@ export const orderAPI = {
    */
   getStats: async () => {
     const response = await fetch(`${API_BASE_URL}/orders/stats`, {
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  }
+};
+
+/**
+ * Cart APIs
+ */
+export const cartAPI = {
+  /**
+   * Get all items in user's cart
+   * @returns {Promise<Array>} Array of cart items
+   */
+  getCart: async () => {
+    const response = await fetch(`${API_BASE_URL}/cart`, {
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  },
+
+  /**
+   * Add item to cart
+   * @param {number} plant_id - Plant ID
+   * @param {number} quantity - Quantity to add
+   * @returns {Promise<object>} Cart item
+   */
+  addToCart: async (plant_id, quantity) => {
+    const response = await fetch(`${API_BASE_URL}/cart`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ plant_id, quantity })
+    });
+    return handleResponse(response);
+  },
+
+  /**
+   * Get specific cart item
+   * @param {number} plant_id - Plant ID
+   * @returns {Promise<object>} Cart item
+   */
+  getCartItem: async (plant_id) => {
+    const response = await fetch(`${API_BASE_URL}/cart/${plant_id}`, {
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  },
+
+  /**
+   * Update cart item quantity
+   * @param {number} plant_id - Plant ID
+   * @param {number} quantity - New quantity
+   * @returns {Promise<object>} Updated cart item
+   */
+  updateCartItem: async (plant_id, quantity) => {
+    const response = await fetch(`${API_BASE_URL}/cart/${plant_id}`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ quantity })
+    });
+    return handleResponse(response);
+  },
+
+  /**
+   * Remove item from cart
+   * @param {number} plant_id - Plant ID
+   * @returns {Promise<object>} Removed item
+   */
+  removeFromCart: async (plant_id) => {
+    const response = await fetch(`${API_BASE_URL}/cart/${plant_id}`, {
+      method: 'DELETE',
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  },
+
+  /**
+   * Clear entire cart
+   * @returns {Promise<object>} Confirmation
+   */
+  clearCart: async () => {
+    const response = await fetch(`${API_BASE_URL}/cart`, {
+      method: 'DELETE',
       headers: getAuthHeaders()
     });
     return handleResponse(response);
