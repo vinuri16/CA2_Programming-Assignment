@@ -87,7 +87,7 @@ export default function Login() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500"
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md text-black placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500"
                   placeholder="Enter your email"
                 />
               </div>
@@ -106,7 +106,7 @@ export default function Login() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500"
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md text-black placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500"
                   placeholder="Enter your password"
                 />
               </div>
@@ -142,24 +142,6 @@ export default function Login() {
               </button>
             </div>
           </form>
-
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Test Account</span>
-              </div>
-            </div>
-
-            <div className="mt-4 text-sm text-gray-600 bg-gray-50 p-3 rounded">
-              <p className="mb-2"><strong>Admin:</strong> admin@test.com / admin123</p>
-              <p className="mb-2"><strong>Staff:</strong> staff@test.com / staff123</p>
-              <p><strong>Customer:</strong> customer@test.com / customer123</p>
-              <p className="mt-3 text-xs text-gray-500">Or create a new account with Register</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
