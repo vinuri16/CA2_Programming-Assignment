@@ -22,7 +22,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 // API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/plants", plantRoutes);
@@ -53,7 +52,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start the Server
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
   console.log("📋 Available endpoints:");
