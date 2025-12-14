@@ -17,7 +17,12 @@ CREATE TABLE plants (
     stock_quantity INT NOT NULL DEFAULT 0 CHECK (stock_quantity >= 0),
     low_stock_threshold INT DEFAULT 10 CHECK (low_stock_threshold >= 0),
     image_url VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    image_alt TEXT DEFAULT 'Image',
+    category VARCHAR(50) DEFAULT 'Indoor',
+    care_level VARCHAR(50) DEFAULT 'Easy',
+    light_requirement VARCHAR(100) DEFAULT 'Bright Indirect',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Orders table
